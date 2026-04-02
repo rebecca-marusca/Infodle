@@ -3,10 +3,13 @@ const path = require("path");
 const app = express();
 const PORT = 3000;
 
-app.use(express.static('public'));
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
+    res.render("index", { title: "Infodle" });
 });
 
 app.listen(PORT, () => {
